@@ -21,6 +21,6 @@ describe("strict parser that is case sensitive",function(){
     // true indicates that parser is case sensitive
     assert.throws(()=>{
       kvParser.parse("NAME=jayanth");
-    })
+    });
   });
 });
