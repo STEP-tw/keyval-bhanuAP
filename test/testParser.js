@@ -211,11 +211,13 @@ describe("error handling",function(){
   });
 
   it("throws error on missing value when value is unquoted",function(){
-    assert.throws(
+    chaiAssert.throws(
       () => {
         kvParser.parse("key=")
       },
-      errorChecker("key",3,MissingValueError))
+      'Missing value'
+      // errorChecker("key",3,MissingValueError)
+    )
   });
 
   it("throws error on missing value when value is quoted",function(){
