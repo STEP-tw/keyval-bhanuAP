@@ -1,6 +1,7 @@
 const src=function(filePath){return "../src/"+filePath};
 const errors=function(filePath){return "../src/errors/"+filePath};
 
+const Parsed = require(src('parsed'));
 const assert=require('assert');
 const chaiAssert = require('chai').assert;
 const StrictParser=require(src('index.js')).StrictParser;
@@ -24,8 +25,10 @@ describe("strict parser",function(){
   it("should only parse keys that are specified for multiple keys",function(){
     let kvParser=new StrictParser(["name","age"]);
     let actual=kvParser.parse("name=john age=23");
-    let expected={name:"john",age:"23"};
-    chaiAssert.include(expected,actual);
+    let expected = new Parsed();
+    expected.name='john';
+    expected.age='23';
+    chaiAssert.deepEqual(expected,actual);
     chaiAssert.throws(
       () => {
         var p=kvParser.parse("color=blue");
