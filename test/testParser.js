@@ -3,7 +3,7 @@ const errors=function(filePath){return "../src/errors/"+filePath};
 
 const Parsed = require(src('parsed.js'));
 const assert = require('chai').assert;
-const nodeAssert=require('assert');
+// const nodeAssert=require('assert');
 const Parser=require(src('index.js')).Parser;
 const MissingValueError=require(errors('missingValueError.js'));
 const MissingEndQuoteError=require(errors('missingEndQuoteError.js'));
@@ -252,11 +252,13 @@ describe("error handling",function(){
     kvParser=new Parser();
   });
 
+
   it("throws error on missing value when value is unquoted",function(){
     assert.throws(
       () => {
         kvParser.parse("key=")
       },
+      // errorChecker("key",3,MissingValueError)
       'Missing value'
     )
   });
@@ -266,6 +268,7 @@ describe("error handling",function(){
       () => {
         kvParser.parse("key=\"value")
       },
+      // errorChecker("key",9,MissingEndQuoteError)
       'Missing end quote'
     )
   });
